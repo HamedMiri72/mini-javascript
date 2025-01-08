@@ -43,5 +43,22 @@
 
         </div>
 
+
+        <script>
+
+            const apiKey = "6b4b28dd5f7dfdb5dd77a4b9515ea829";
+            const apiUrl = "https://api.openweathermap.org/data/2.5/weather?&units=metric&q=london";
+
+            async function checkWeather(){
+                const response = await fetch(apiUrl + `&appid=${apiKey}`);
+                var data = await response.json();
+                console.log(data);
+            }
+            checkWeather();
+
+            
+
+        </script>
+
     </body>
 </html>
