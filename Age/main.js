@@ -1,5 +1,7 @@
 let userInput = document.getElementById("date");
 
+let result = document.getElementById("result");
+
 //to limit the future dates
 userInput.max = new Date().toISOString().split("T")[0];
 
@@ -31,7 +33,20 @@ function calculateAge() {
         d3 = d2 - d1;
     }else {
 
+        m3 --;
+        d3 = getDayInMonth(y1, m1) + d2 - d1;
     }
+
+    if (m3 < 0){
+        m3 = 11;
+        y3--;
+    }
+    result.innerHTML = `You are <span>${y3}</span> years, <span>${m3}</span> month and <span>${d3}</span> days`;
 }
 
-function 
+
+//The purpose of this function is to calculate the number of days in a specific month of a specific year.
+//0 means last day of the previous month
+function getDayInMonth(year, month) {
+    return new Date(year, month, 0).getDate();
+}
