@@ -30,26 +30,48 @@
 
     <script>
 
-
         const inputBox = document.getElementById("input-box");
-        const listContainer = document.getElementById("list-container");
+        const containerList = document.getElementById("list-container");
 
         function addTask() {
             if(inputBox.value === ""){
-                alert("you must add somthing here!");
-            }
+            alert("you should write a task here!");
+        } else{
             let li = document.createElement("li");
             li.innerHTML = inputBox.value;
-            listContainer.appendChild(li);
+            containerList.appendChild(li);
             let img = document.createElement("img");
             img.src = "./close.png";
             li.appendChild(img);
         }
-
         inputBox.value = "";
+        saveTask();
+        
+    }
+
+   containerList.addEventListener("click", function(e){
+    if(e.target.tagName === "LI"){
+        e.target.classList.toggle("checked");
+        saveTask();
+        
+    }else if(e.target.tagName === "IMG"){
+        e.target.parentElement.remove();
+        saveTask();
+        
+    }
+   }, false);
 
 
+   function saveTask(){
+    localStorage.setItem("data", containerList.innerHTML);
+   }
 
+   function showTask() {
+    containerList.innerHTML = localStorage.getItem("data");
+   }
+
+   showTask();
+        
 
 
     </script>
